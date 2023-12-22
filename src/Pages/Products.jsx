@@ -17,7 +17,7 @@ const Products = () => {
     })
   },[])
   
-  console.log(products)
+  // console.log(products)
 
   // console.log("selected Product", selectedProduct)
   
@@ -110,7 +110,7 @@ const Products = () => {
     
               <div className="mt-3">
                 <p className="text-sm text-product">{ product.category }</p>
-                <Link to="/">
+                <Link to={`/product/${product._id}`}>
                   <h1 className="font-semibold my-1.5 hover:text-primary">
                     { product.title }
                   </h1>

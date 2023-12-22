@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ProductModal = ({ modal, product }) => {
 
@@ -31,7 +32,9 @@ const ProductModal = ({ modal, product }) => {
               <img className="w-[400px]" src={img} alt="" />
             </div>
             <div>
-              <h1 className="md:text-h2 text-xl font-semibold">{ title }</h1>
+  
+                 <h1 className="md:text-h2 text-xl font-semibold">{ title }</h1>
+  
 
               <h1 className="md:text-bannerParagraph text-sm my-3">
                 <span  className="line-through mr-2">{discountPrice? `$${discountPrice }` : "" } </span>
@@ -53,7 +56,7 @@ const ProductModal = ({ modal, product }) => {
                     id="size"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5"
                   >
-                    {size.map((s,i) => (
+                    {size?.map((s,i) => (
                       <option key={i} value={s}>{s}</option>
                     ))}
                   </select>
@@ -70,7 +73,7 @@ const ProductModal = ({ modal, product }) => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-primary focus:border-primary block w-full p-2.5"
                   >
                     {
-                      color.map((co, i) => (
+                      color?.map((co, i) => (
                         <option key={i} value={co}>{ co}</option>
                       ))
                     }
