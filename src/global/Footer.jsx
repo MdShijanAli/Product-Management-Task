@@ -1,8 +1,8 @@
 
 const Footer = () => {
   return (
-    <div>
-      <h1>This is Footer</h1>
+    <div className="bg-black text-center text-white p-3">
+      <p>© 2023 All Rights Reserved.</p>
     </div>
   );
 };
