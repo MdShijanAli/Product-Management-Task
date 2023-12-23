@@ -4,6 +4,8 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from '../layout/Main';
 import Products from '../Pages/Products';
 import ProductDetails from '../Pages/ProductDetails';
+import Login from '../components/auth/Login';
+import Register from '../components/auth/Register';
 
 
 
@@ -17,6 +19,14 @@ export const routes = createBrowserRouter([
           {
             path: '/',
             element: <Products />
+        },
+          {
+            path: '/login',
+            element: <Login />
+        },
+          {
+            path: '/register',
+            element: <Register />
         },
           {
             path: '/product/:id',

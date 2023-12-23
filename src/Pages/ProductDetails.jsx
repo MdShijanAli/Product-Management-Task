@@ -101,31 +101,7 @@ const ProductDetails = () => {
                  </div>
                </div>
 
-               <div className="flex gap-10 pt-5 items-center">
-                 <div className="flex gap-3 items-center">
-                   <i className="pi pi-heart text-primary text-xl font-medium"></i>
-                   <Link to="/wish-list">
-                     <p className="text-[#424242] text-[18px] hover:text-primary">Add to Wishlist</p>
-                   </Link>
-                 </div>
-                 <div className="flex gap-3 items-center">
-                   <img className="w-7" src="/images/shuffle.png" alt="" />
-                   <Link to="/wish-list">
-                     <p className="text-[#424242] text-[18px] hover:text-primary">Add to Compare</p>
-                   </Link>
-                 </div>
-               </div>
 
-               <div className="divider"></div>
-
-               <div className="flex items-center justify-between">
-                 <p><span className="text-primary">Code : </span> Ch-256xl</p>
-                 <p><span className="text-primary">Share </span> 
-                 <i className="pi pi-facebook text-gray-500 mx-1 hover:text-primary"></i>
-                 <i className="pi pi-twitter text-gray-500 mx-1 hover:text-primary"></i>
-                 <i className="pi pi-linkedin text-gray-500 mx-1 hover:text-primary"></i>
-                 </p>
-               </div>
              </div>
            </div>
      </div>

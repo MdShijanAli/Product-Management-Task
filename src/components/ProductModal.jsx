@@ -20,13 +20,9 @@ const ProductModal = ({ modal, product }) => {
 <input type="checkbox" id={modal} className="modal-toggle" />
 <div className="modal" role="dialog">
   <div className="modal-box w-11/12 max-w-5xl p-10 rounded-sm">
-          <form method="dialog">
-            <button
-              className="btn btn-sm border border-black btn-circle btn-ghost absolute right-2 top-2"
-            >
-              ✕
-            </button>
-          </form>
+ 
+
+
           <div className="grid md:grid-cols-2 gap-10 mt-5">
             <div className="h-full flex items-center justify-center">
               <img className="w-[400px]" src={img} alt="" />
