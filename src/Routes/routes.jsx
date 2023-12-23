@@ -6,6 +6,7 @@ import Products from '../Pages/Products';
 import ProductDetails from '../Pages/ProductDetails';
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
+import Cart from '../components/Cart';
 
 
 
@@ -27,6 +28,10 @@ export const routes = createBrowserRouter([
           {
             path: '/register',
             element: <Register />
+        },
+          {
+            path: '/cart',
+            element: <Cart />
         },
           {
             path: '/product/:id',

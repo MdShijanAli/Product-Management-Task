@@ -1,9 +1,8 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-  const navigate = useNavigate();
   const createUsers = async(e) => {
     e.preventDefault();
     const form = e.target;
@@ -23,17 +22,15 @@ const Register = () => {
       const response = await axios.post('http://localhost:5000/api/user', userData);
       toast.success(`${response.data.name} Your Account Created Successfully`)
             
-            const token = response.data.token;
 
-            localStorage.setItem('token', token);
-            document.cookie = `token=${token}; SameSite=None; Secure; HttpOnly`;
+      localStorage.setItem('userEmail', email);
       
     } catch (error) {
       toast.error('User Account can not create at this time, please try again')
       console.error("Error creating user:", error.response.data);
     }
     finally {
-      navigate('/')
+      window.location.href="/"
     }
 
   }

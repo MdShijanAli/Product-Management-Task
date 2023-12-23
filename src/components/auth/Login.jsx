@@ -1,6 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Login = () => {
+  const { currentUser } = useContext(AuthContext)
+  
+  console.log("user", currentUser)
 
   const login = (e) => {
     e.preventDefault();

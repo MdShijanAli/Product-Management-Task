@@ -1,11 +1,39 @@
-import { useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import axios from "axios";
+import { useContext, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
 
 const ProductDetails = () => {
+  const {currUser} = useContext(AuthContext)
   const currentProduct = useLoaderData();
-  const [mainImg, setMainImg] = useState(null);
-
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectColor, setSelectColor] = useState(null);
+  const [selectSize, setSelectSize] = useState(null);
   const [count, setCount] = useState(1);
+  const navigate = useNavigate();
+
+  const addToCart = async(product) => {
+    const addToCartData = {
+      productId: product._id,
+      img: selectedImg,
+      title: product.title,
+      price: product.price,
+      color: selectColor,
+      size: selectSize,
+      quantity: count,
+      userEmail: currUser
+    }
+    try {
+      const response = await axios.post('http://localhost:5000/api/cart', addToCartData);
+      toast.success(`${addToCartData.title} addded cart successfully`)
+    } catch(err) {
+      console.log(err.message)
+      toast.error('Product Add to cart Failed')
+    } finally {
+      navigate('/cart')
+    }
+  }
 
   return (
     <div>
@@ -14,13 +42,13 @@ const ProductDetails = () => {
      <div className="grid grid-cols-2 gap-10">
            <div>
               <div className="border-2 rounded-md h-[550px]">
-                    <img className="w-full h-full rounded-md" src={mainImg? mainImg : currentProduct.img} alt=""  />
+                    <img className="w-full h-full rounded-md" src={selectedImg? selectedImg : currentProduct.img} alt=""  />
               </div>
 
               <div className="mt-5 flex gap-5">
               {
                 currentProduct.images.map((img, i) => (
-                  <div onClick={()=>setMainImg(img)} key={i} className="h-36 border-2 rounded-md">
+                  <div onClick={()=>setSelectedImg(img)} key={i} className="h-36 border-2 rounded-md">
                  <img className="w-full h-full rounded-md" src={img} alt="img" />
                </div>
                 ))
@@ -59,7 +87,7 @@ const ProductDetails = () => {
 
                <div className="border my-10"></div>
 
-               <p className="text-justify tracking-wider leading-7">Lorem ipsum dolor sit amet, consecte adipisicing elit, sed do eiusmll tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mill veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip exet commodo consequat. Duis aute irure dolor</p>
+              <p className="text-justify tracking-wider leading-7">{ currentProduct.description }</p>
              
                <div className="py-5 flex items-center gap-10">
                  <p className="font-medium text-xl">Color</p>
@@ -68,7 +96,7 @@ const ProductDetails = () => {
                    <ul className="flex gap-5">
                     {
                       currentProduct?.color?.map((co, i) => (
-                        <li key={i} className={`w-9 h-9 rounded-full ${co == 'blue'? 'bg-blue-700' : co == 'red'? 'bg-red-800' : 'bg-black'} border ring-1 ring-offset-2 ring-gray-300 hover:ring-primary`}></li>
+                        <li onClick={()=>setSelectColor(co)} key={i} className={`w-9 h-9 rounded-full ${selectColor == co? 'ring-primary': ''} ${co == 'blue'? 'bg-blue-700' : co == 'red'? 'bg-red-800' : 'bg-black'} border ring-1 ring-offset-2 ring-gray-300 hover:ring-primary`}></li>
                       ))
                     }
                     </ul>
@@ -81,7 +109,7 @@ const ProductDetails = () => {
                    <ul className="flex gap-5">
                     {
                       currentProduct?.size?.map((s, i) => (
-                        <li key={i} className="w-9 h-9 rounded-full bg-gray-300 border ring-1 ring-offset-2 ring-gray-300 hover:ring-primary flex items-center justify-center"><a className="text-sm" href="">{s}</a></li>
+                        <li onClick={()=>setSelectSize(s)} key={i} className={`${selectSize == s? "ring-primary": ""} w-9 h-9 rounded-full bg-gray-300 border ring-1 ring-offset-2 ring-gray-300 hover:ring-primary flex items-center justify-center`}><span className="text-sm">{s}</span></li>
                       ))
                      }
                    </ul>
@@ -97,7 +125,7 @@ const ProductDetails = () => {
                    </div>
                  </div>
                  <div>
-                   <button className="px-10 py-4 bg-black hover:bg-primary text-xl text-white">Add to Cart</button>
+                   <button onClick={()=>addToCart(currentProduct)} className="px-10 py-4 bg-black hover:bg-primary text-xl text-white">Add to Cart</button>
                  </div>
                </div>
 
