@@ -30,7 +30,7 @@ const ThankYou = () => {
     setAmount(prices);
   },[getOrders,currentUser])
 
-  console.log('Orders', orders)
+
   
 
 
