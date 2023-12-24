@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   const [users, setUser] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/users')
+    fetch('https://product-task-ser.vercel.app/api/users')
       .then(res => res.json())
        .then(data => {
       setUser(data)

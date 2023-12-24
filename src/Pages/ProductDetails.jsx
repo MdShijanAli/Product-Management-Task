@@ -28,7 +28,7 @@ const ProductDetails = () => {
       existingCartItems.push(addToCartData);
 
 
-      // const response = await axios.post('http://localhost:5000/api/cart', addToCartData);
+      // const response = await axios.post('https://product-task-ser.vercel.app/api/cart', addToCartData);
       localStorage.setItem('cart', JSON.stringify(existingCartItems));
       toast.success(`${addToCartData.title} addded cart successfully`)
     } catch(err) {

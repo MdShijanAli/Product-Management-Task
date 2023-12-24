@@ -37,7 +37,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/api/user', userData);
+      const response = await axios.post('https://product-task-ser.vercel.app/api/user', userData);
       toast.success(`${response.data.name} Your Account Created Successfully`)
             
 

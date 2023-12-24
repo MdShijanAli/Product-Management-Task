@@ -37,7 +37,7 @@ const Cart = () => {
       return navigate('/login')
     }
     try {
-      fetch('http://localhost:5000/api/orders', {
+      fetch('https://product-task-ser.vercel.app/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

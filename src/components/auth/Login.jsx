@@ -25,7 +25,7 @@ const Login = () => {
       password
     }
 
-    fetch('http://localhost:5000/api/login', {
+    fetch('https://product-task-ser.vercel.app/api/login', {
       method: 'POST',
         headers: {
           'Content-Type': 'application/json',

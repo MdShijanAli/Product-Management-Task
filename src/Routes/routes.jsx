@@ -43,7 +43,7 @@ export const routes = createBrowserRouter([
             path: '/product/:id',
               element: <ProductDetails />,
               loader: async ({ params }) => {
-                const response = await fetch(`http://localhost:5000/api/products/${params.id}`);
+                const response = await fetch(`https://product-task-ser.vercel.app/api/products/${params.id}`);
                 const data = await response.json();
                 return data;
               }

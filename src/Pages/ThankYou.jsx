@@ -10,7 +10,7 @@ const ThankYou = () => {
   const [amount, setAmount] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/orders')
+    axios.get('https://product-task-ser.vercel.app/api/orders')
       .then(response => {
         setGetOrders(response.data)
       })
