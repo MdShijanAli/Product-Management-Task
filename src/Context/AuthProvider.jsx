@@ -8,9 +8,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
-  const [user, setUser] = useState([])
-  const [cartProducts, setCartProducts] = useState([])
-  
+  const [users, setUser] = useState([])
+
   useEffect(() => {
     fetch('http://localhost:5000/api/users')
       .then(res => res.json())
@@ -25,26 +24,12 @@ const AuthProvider = ({ children }) => {
        })
   }, []);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/carts')
-    .then(res => res.json())
-    .then(data => {
-      setCartProducts(data)
-    })
-   .catch(err => {
-   console.log(err.message)
-   })
-   .finally(() => {
-      setLoading(false)
-    })
-  },[])
 
-  const userEmail = localStorage.getItem('userEmail');
+  const usrEmail = localStorage.getItem('userEmail');
 
-  const currentUser = user.find(usr => usr.email == userEmail);
+  const currentUser = users.find(usr => usr.email == usrEmail);
 
-  const cartItms = cartProducts.filter(cart=>cart.userEmail == userEmail)
-
+  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
 
 
 
@@ -52,11 +37,11 @@ const AuthProvider = ({ children }) => {
 
 
   const authInfo = {
-    user,
+    users,
     loading,
-    userEmail,
+    usrEmail,
     currentUser,
-    cartItms
+    cartItems,
 
 
   }

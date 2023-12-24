@@ -1,9 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
+import Loading from "../global/Loading";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
+  const {loading} = useContext(AuthContext)
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/products')
@@ -19,6 +22,12 @@ const Products = () => {
 
   // console.log("selected Product", selectedProduct)
   
+  if (loading) {
+    return <Loading/>
+}
+
+
+
   return (
     <div>
       <div className="max-w-7xl mx-auto px-6 py-20">

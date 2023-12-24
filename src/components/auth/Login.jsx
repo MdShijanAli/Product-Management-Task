@@ -1,11 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { currentUser } = useContext(AuthContext)
-  
+  const [cartProduct, setCartProduct] = useState([]);
   console.log("user", currentUser)
+
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartProduct(cartItems)
+  },[])
+
 
   const login = (e) => {
     e.preventDefault();
@@ -18,7 +25,40 @@ const Login = () => {
       password
     }
 
-    console.log(loginData)
+    fetch('http://localhost:5000/api/login', {
+      method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginData),
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(data => {
+      toast.success('Login Successfull')
+      localStorage.setItem('userEmail', email);
+      const updatedCartProduct = cartProduct.map((pro) => ({
+        ...pro,
+        userEmail: email,
+      }));
+    
+      // Set the updated cart in the component state
+      setCartProduct(updatedCartProduct);
+  
+      // Update localStorage with the modified cart items
+      localStorage.setItem('cart', JSON.stringify(updatedCartProduct));
+  
+      window.location.href='/'
+    })
+    .catch(err => {
+      console.log(err.message)
+      toast.error(`${err.message}`)
+  })
+
   }
   return (
     <div>

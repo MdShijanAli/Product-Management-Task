@@ -1,8 +1,19 @@
 import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider";
 
 const Register = () => {
+  const { users } = useContext(AuthContext)
+  const navigate = useNavigate()
+  
+  const [cartProduct, setCartProduct] = useState([]);
+  useEffect(() => {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    setCartProduct(cartItems)
+  }, [])
+  
   const createUsers = async(e) => {
     e.preventDefault();
     const form = e.target;
@@ -18,12 +29,32 @@ const Register = () => {
 
     console.log("User Data", userData)
 
+    const existUser = users.find(user => user.email == email)
+    
+    if (existUser) {
+      toast.error(`${email} is already registered. Please Login In`)
+      return navigate('/login')
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/api/user', userData);
       toast.success(`${response.data.name} Your Account Created Successfully`)
             
 
       localStorage.setItem('userEmail', email);
+
+      const updatedCartProduct = cartProduct.map((pro) => ({
+        ...pro,
+        userEmail: email,
+      }));
+    
+      // Set the updated cart in the component state
+      setCartProduct(updatedCartProduct);
+  
+      // Update localStorage with the modified cart items
+      localStorage.setItem('cart', JSON.stringify(updatedCartProduct));
+  
+
       
     } catch (error) {
       toast.error('User Account can not create at this time, please try again')

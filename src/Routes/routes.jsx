@@ -7,6 +7,8 @@ import ProductDetails from '../Pages/ProductDetails';
 import Login from '../components/auth/Login';
 import Register from '../components/auth/Register';
 import Cart from '../components/Cart';
+import ThankYou from '../Pages/ThankYou';
+import PriveteRoute from './PrivetRoute/PrivetRoute';
 
 
 
@@ -32,6 +34,10 @@ export const routes = createBrowserRouter([
           {
             path: '/cart',
             element: <Cart />
+        },
+          {
+            path: '/thank-you',
+            element: <PriveteRoute><ThankYou /></PriveteRoute>
         },
           {
             path: '/product/:id',
