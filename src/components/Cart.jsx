@@ -21,13 +21,9 @@ const Cart = () => {
 
 
   const deleteProduct = (id) => {
-    // Update React state with the modified cart items
     const updatedCartProduct = cartProduct.filter((pro) => pro?.productId !== id);
     setCartProduct(updatedCartProduct);
-
-    // Update localStorage with the modified cart items
     localStorage.setItem('cart', JSON.stringify(updatedCartProduct));
-
     console.log('Deleted Product', id);
   };
 
@@ -40,8 +36,7 @@ const Cart = () => {
       fetch('https://product-task-ser.vercel.app/api/orders', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          // Add any additional headers as needed
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(cartProduct),
       })
