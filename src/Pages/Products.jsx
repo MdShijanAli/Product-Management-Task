@@ -18,9 +18,7 @@ const Products = () => {
     })
   },[])
   
-  // console.log(products)
 
-  // console.log("selected Product", selectedProduct)
   
   if (loading) {
     return <Loading/>
